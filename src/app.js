@@ -12,8 +12,12 @@ app.use("/",(req,res,next)=>{
    }
 })
 app.get("/user/addUser",(req,res,next)=>{
-    console.log("REQUESTDATA",req.params)
-    res.send({name:"Gourav",lastName:"Jha"})
+    try{
+        throw new Error("user Data is missing")
+    }
+    catch(err){
+        res.status(500).json({ error: err.message });
+    }
 })
 app.get("/user/removeuser",(req,res,next)=>{
     res.send("User removed")
