@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema({
         type: Number
     },
     gender:{
-        typr: String
+        type: String
     }
 })
-module.exports = mongoose.module("user",userSchema)
+module.exports = mongoose.model("user",userSchema)

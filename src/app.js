@@ -4,12 +4,31 @@ const app = express()
 
 const User = require("./model/user")
 
-connectDB().then(()=>{
+app.use(express.json())
+
+app.post("/signup", async (req, res) => {
+    //Creating a new instance of user
+    console.log(req.body)
+    const userData = req.body
+    const user = User(
+       userData
+    )
+    try {
+        await user.save()
+        res.send("User added succesfully")
+    }
+
+    catch (err) {
+        res.status(400).send("Error saving in user:"+err.message)
+    }
+})
+
+connectDB().then(() => {
     console.log("DataBase connected")
-    app.listen(7777,()=>{
+    app.listen(7777, () => {
         console.log("Server coonected ")
     })
-}).catch((err)=>{
+}).catch((err) => {
     console.log(err)
 })
 
